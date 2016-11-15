@@ -1,0 +1,59 @@
+---
+title: Local Storage
+script: local_storage.js
+---
+<p>Store data in the browser cache</p>
+<div class="api-example">
+    <h3>Example</h3>
+    <form>
+        <label>Store Something</label>
+        <div class="input-group">
+            <input type="text" class="form-control" id="input">
+            <span class="input-group-btn">
+                <button class="btn btn-primary" type="submit" id="submit">Store It</button>
+            </span>
+        </div><!-- /input-group -->
+    </form>
+    <form>
+        <label>Stored String: </label>
+        <div class="input-group">
+            <input class="form-control" type="text" disabled id="storage-variable"></input>
+        </div>
+    </form>
+</div>
+<span class="tip">Refresh the page, the variable will remain</span>
+<h3>Code</h3>
+<span class="file label label-primary">local_storage.html</span>
+<pre>
+    <code class="html">
+&lt;form&gt;
+&lt;label&gt;Store Something&lt;/label&gt;
+&lt;input type=&quot;text&quot; id=&quot;input&quot;&gt;
+&lt;button id=&quot;submit&quot; type=&quot;submit&quot;&gt;Store It&lt;/button&gt;
+&lt;/form&gt;
+&lt;label&gt;Stored String: &lt;/label&gt;
+&lt;input type=&quot;text&quot; disabled id=&quot;storage-variable&quot;&gt;&lt;/input&gt;
+    </code>
+</pre>
+<span class="file label label-success">local_storage.js</span>
+<pre>
+    <code class="javascript">
+if (window.localStorage) {
+    var input = document.getElementById('input');
+    var submit = document.getElementById('submit');
+    var storageVariable = document.getElementById('storage-variable');
+
+    updateStorageVariable();
+
+    function updateStorageVariable() {
+        storageVariable.value = localStorage.getItem('storage');
+    }
+
+    submit.addEventListener("click", function(e) {
+        e.preventDefault();
+        localStorage.setItem('storage', input.value);
+        updateStorageVariable();
+    }, false);
+}
+    </code>
+</pre>

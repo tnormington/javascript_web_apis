@@ -1,0 +1,35 @@
+---
+title: History
+layout: api
+script: history.js
+---
+<p>Gain access to various methods and properties surrounding the browser history.</p>
+<div class="example">
+    <h3>Example</h3>
+    <p>Click this button to go back to a random point in your Window.history object.</p>
+    <button class="btn btn-danger" id="random-history-button">Go Back In Time</button>
+    <span class="tip tip--warning">This may have unexpected results depending on your browser history.</span>
+</div>
+<h3>Code</h3>
+<label class="label label-primary">history.html</label>
+<pre>
+    <code class="html">
+&lt;p&gt;Click this button to go back to a random point in your Window.history object.&lt;/p&gt;
+&lt;button class=&quot;btn btn-danger&quot; id=&quot;random-history-button&quot;&gt;Go Back In Time&lt;/button&gt;
+    </code>
+</pre>
+<label class="label label-success">history.js</label>
+<pre>
+    <code class="js">
+window.onload = function() {
+    var l = history.length;
+    var randomHistoryIndex = Math.floor(Math.random() * l) + 1;
+    var button = document.getElementById('random-history-button');
+    
+    button.addEventListener('click', function() {
+        console.log(-randomHistoryIndex);
+        history.go(-randomHistoryIndex);
+    });
+};
+    </code>
+</pre>

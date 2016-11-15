@@ -1,0 +1,53 @@
+---
+title: Ajax
+script: ajax.js
+---
+<p>Load data asynchronously from another location</p>
+<div class="example">
+    <h3>Example</h3>
+    <button id="ajax-button" data-path="ajax_data.html" class="btn btn-primary">Ajax!</button>
+    <div id="ajax-landing-zone"></div>
+</div>
+<h3>Code</h3>
+<span class="file label label-primary">ajax.html</span>
+<pre>
+    <code class="html">
+&lt;button id=&quot;ajax-button&quot; data-path=&quot;ajax_data.html&quot;&gt;Ajax!&lt;/button&gt;
+&lt;div id=&quot;ajax-landing-zone&quot;&gt;&lt;/div&gt;
+    </code>
+</pre>
+<span class="file label label-primary">ajax_data.html</span>
+<pre>
+    <code class="html">
+&lt;h4&gt;Aha! I am HTML from a different page&lt;/h4&gt;
+    </code>
+</pre>
+<span class="file label label-success">ajax.js</span>
+<pre>
+    <code class="javascript">
+window.onload = function() {
+    var ajaxButton = document.getElementById('ajax-button');
+    var ajaxLandingZone = document.getElementById('ajax-landing-zone');
+
+    ajaxButton.addEventListener('click', function(e) {
+        var path = '/'+this.dataset.path;
+        loadContent(path);
+    }, false);
+
+    function loadContent(path) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', path);
+        xhr.send(null);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    ajaxLandingZone.innerHTML += xhr.responseText;
+                } else {
+                    console.log('Error: ' + xhr.status); // An error occurred during the request.
+                }
+            }
+        };
+    }
+};
+    </code>
+</pre>

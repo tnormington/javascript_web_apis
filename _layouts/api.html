@@ -1,0 +1,10 @@
+---
+layout: page
+---
+<section class="api" id="{{ page.title | slugify }}">
+    <h2>{{page.title}}</h2>
+    {{content}}
+</section>
+{% if page.script %}
+    <script src="/assets/js/apis/{{page.script}}" charset="utf-8"></script>
+{% endif %}
