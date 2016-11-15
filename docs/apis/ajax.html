@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Javascript Web APIs</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/github.min.css" media="screen">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" media="screen">
+        <link rel="stylesheet" href="/assets/css/styles.css" media="screen">
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/">Home</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav">
+                  
+                    <li class="active"><a href="/apis/ajax.html">Ajax</a></li>
+                  
+                    <li ><a href="/apis/history.html">History</a></li>
+                  
+                    <li ><a href="/apis/local_storage.html">Local Storage</a></li>
+                  
+              </ul>
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+        </nav>
+        <div class="container">
+    <section class="api" id="ajax">
+    <h2>Ajax</h2>
+    <p>Load data asynchronously from another location</p>
+<div class="example">
+    <h3>Example</h3>
+    <button id="ajax-button" data-path="ajax_data.html" class="btn btn-primary">Ajax!</button>
+    <div id="ajax-landing-zone"></div>
+</div>
+<h3>Code</h3>
+<span class="file label label-primary">ajax.html</span>
+<pre>
+    <code class="html">
+&lt;button id=&quot;ajax-button&quot; data-path=&quot;ajax_data.html&quot;&gt;Ajax!&lt;/button&gt;
+&lt;div id=&quot;ajax-landing-zone&quot;&gt;&lt;/div&gt;
+    </code>
+</pre>
+<span class="file label label-primary">ajax_data.html</span>
+<pre>
+    <code class="html">
+&lt;h4&gt;Aha! I am HTML from a different page&lt;/h4&gt;
+    </code>
+</pre>
+<span class="file label label-success">ajax.js</span>
+<pre>
+    <code class="javascript">
+window.onload = function() {
+    var ajaxButton = document.getElementById('ajax-button');
+    var ajaxLandingZone = document.getElementById('ajax-landing-zone');
+
+    ajaxButton.addEventListener('click', function(e) {
+        var path = '/'+this.dataset.path;
+        loadContent(path);
+    }, false);
+
+    function loadContent(path) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', path);
+        xhr.send(null);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    ajaxLandingZone.innerHTML += xhr.responseText;
+                } else {
+                    console.log('Error: ' + xhr.status); // An error occurred during the request.
+                }
+            }
+        };
+    }
+};
+    </code>
+</pre>
+
+</section>
+
+    <script src="/assets/js/apis/ajax.js" charset="utf-8"></script>
+
+
+</div>
+
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js" charset="utf-8"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" charset="utf-8"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+        <script src="/assets/js/all.js" charset="utf-8"></script>
+    </body>
+</html>
